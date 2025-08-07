@@ -14,10 +14,16 @@ public class FPController : MonoBehaviour
     public float verticalLookLimit = 90f;
 
 
-    [Header("Shooitng")]
+    [Header("Shootng")]
     public GameObject bulletPrefab;
     public Transform gunPoint;
 
+
+    [Header("Crouching")]
+    public float crouchHeight = 1f;
+    public float standHeight = 2f;
+    public float crouchSpeed = 2.5f;
+    public float standardSpeed = 5f;
 
     private CharacterController controller;
     private Vector2 moveInput;
@@ -74,8 +80,22 @@ public class FPController : MonoBehaviour
             if (rb != null)
             {
                 rb.AddForce(gunPoint.forward * 1000f); // Adjust the force as needed
-                Destroy(bullet, 3); //deletes te bullet after 3 seconds
+                Destroy(bullet, 3); //deletes the bullet after 3 seconds, better do to object pooling in the future but this is fine for now
             }
+        }
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            controller.height = crouchHeight;
+            moveSpeed = crouchSpeed;
+        }
+        else if (context.canceled)
+        {
+            controller.height = standHeight;
+            moveSpeed = standardSpeed;
         }
     }
 
