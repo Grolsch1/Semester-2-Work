@@ -35,6 +35,7 @@ public class FPController : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        standardSpeed = moveSpeed; // Store the initial move speed for standing
         Cursor.lockState = CursorLockMode.Locked; //stops the cursor from moving around and leaving the game window
         Cursor.visible = false;
     }
