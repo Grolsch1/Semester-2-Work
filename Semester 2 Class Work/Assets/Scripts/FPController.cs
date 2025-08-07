@@ -74,6 +74,7 @@ public class FPController : MonoBehaviour
             if (rb != null)
             {
                 rb.AddForce(gunPoint.forward * 1000f); // Adjust the force as needed
+                Destroy(bullet, 3); //deletes te bullet after 3 seconds
             }
         }
     }
