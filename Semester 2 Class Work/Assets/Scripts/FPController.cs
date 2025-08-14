@@ -18,16 +18,20 @@ public class FPController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform gunPoint;
 
-    [Header("Pickup Settings")]
-    public float pickupRange = 3f;
-    public Transform holdPoint;
-    private PickUpObject heldObject;
-
     [Header("Crouching")]
     public float crouchHeight = 1f;
     public float standHeight = 2f;
     public float crouchSpeed = 2.5f;
     public float standardSpeed = 5f;
+
+    [Header("Pickup Settings")]
+    public float pickupRange = 3f;
+    public Transform holdPoint;
+    private PickUpObject heldObject;
+
+    [Header("Throw Settings")]
+    public float throwForce = 10f;
+    public float throwUpwardBoost = 1f;
 
     private CharacterController controller;
     private Vector2 moveInput;
@@ -48,6 +52,11 @@ public class FPController : MonoBehaviour
     {
         HandleMovement();
         HandleLook();
+
+        if (heldObject != null)
+        {
+            heldObject.MoveToHoldPoint(holdPoint.position);
+        }
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -61,7 +70,7 @@ public class FPController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && controller.isGrounded) 
+        if (context.performed && controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //jump velocity based on jump height and gravity
         }
@@ -125,4 +134,44 @@ public class FPController : MonoBehaviour
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+
+    public void OnPickUp(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        print("hi1");
+
+        if (heldObject == null)
+        {
+            print("hi2");
+            Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+            {
+                PickUpObject pickUp = hit.collider.GetComponent<PickUpObject>();
+                if (pickUp != null)
+                {
+                    print("hi3");
+                    pickUp.PickUp(holdPoint);
+                    heldObject = pickUp;
+                }
+            }
+        }
+        else
+        {
+            heldObject.Drop();
+            heldObject = null;
+        }
+    }
+
+    public void OnThrow(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (heldObject == null) return;
+
+        Vector3 dir = cameraTransform.forward;
+        Vector3 impulse = dir * throwForce + Vector3.up * throwUpwardBoost;
+
+        heldObject.Throw(impulse);
+        heldObject = null;
+    }
+
 }

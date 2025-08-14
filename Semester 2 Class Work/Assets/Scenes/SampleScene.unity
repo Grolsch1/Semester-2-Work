@@ -876,8 +876,8 @@ Transform:
   m_GameObject: {fileID: 166421471}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7017, y: -1.71, z: 1.9232}
-  m_LocalScale: {x: 10.902181, y: 0.9243413, z: 12.478881}
+  m_LocalPosition: {x: 18.6095, y: -1.71, z: -9.4704}
+  m_LocalScale: {x: 64.70902, y: 2.612176, z: 35.26515}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9889651}
@@ -3977,6 +3977,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2042296216}
+  - {fileID: 1163852004}
   m_Father: {fileID: 1339711963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1038892639
@@ -4623,12 +4624,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163852003}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.441, y: 0.164, z: 0.198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.44099998, y: -0.42599994, z: 0.43699998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1339711963}
+  m_Father: {fileID: 1038892638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1205160020
 Mesh:
@@ -5424,7 +5425,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1038892638}
-  - {fileID: 1163852004}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &1339711964
@@ -5570,11 +5570,35 @@ MonoBehaviour:
     m_ActionId: a44d3497-3b90-408a-b62c-fb262bb75e76
     m_ActionName: Player/Crouch
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1339711966}
+        m_TargetAssemblyTypeName: FPController, Assembly-CSharp
+        m_MethodName: OnPickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d6b31e6f-befe-4b18-bfd3-795fe5aa31a5
     m_ActionName: Player/Pickup
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1339711966}
+        m_TargetAssemblyTypeName: FPController, Assembly-CSharp
+        m_MethodName: OnThrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 425e93ea-cbe6-4ceb-a79e-53a7c8b03f62
     m_ActionName: 'Player/Throw[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -5606,6 +5630,10 @@ MonoBehaviour:
   standHeight: 2
   crouchSpeed: 2.5
   standardSpeed: 5
+  pickupRange: 3
+  holdPoint: {fileID: 1163852004}
+  throwForce: 10
+  throwUpwardBoost: 1
 --- !u!43 &1380827855
 Mesh:
   m_ObjectHideFlags: 0
@@ -6136,6 +6164,7 @@ GameObject:
   - component: {fileID: 1445937876}
   - component: {fileID: 1445937875}
   - component: {fileID: 1445937874}
+  - component: {fileID: 1445937879}
   m_Layer: 0
   m_Name: Pickupable
   m_TagString: PickUp
@@ -6253,12 +6282,24 @@ Transform:
   m_GameObject: {fileID: 1445937873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0691, y: 0.72, z: -0.17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.77, y: 0.8889, z: 0.0011}
+  m_LocalScale: {x: 0.6578, y: 0.6578, z: 0.6578}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445937879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445937873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134eb53fd879f3445aaa8b0948907682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1503236703
 GameObject:
   m_ObjectHideFlags: 0

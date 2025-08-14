@@ -1,17 +1,19 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System;
 
 public class PickUpObject : MonoBehaviour
 {
-    private RigidBody rb;
+    private Rigidbody rb;
 
     void Awake()
     {
-        rb = GetComponent<RigidBody>;
+        rb = GetComponent<Rigidbody>();
     }
 
     public void PickUp(Transform holdPoint)
     {
-        rb.UseGravity = false;
+        rb.useGravity = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -23,6 +25,15 @@ public class PickUpObject : MonoBehaviour
     {
         rb.useGravity = true;
         transform.SetParent(null);
+    }
+
+     public void Throw(Vector3 impulse)
+    {
+        transform.SetParent(null);
+        rb.useGravity = true;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.AddForce(impulse, ForceMode.Impulse);
     }
     
     public void MoveToHoldPoint(Vector3 targetPosition)

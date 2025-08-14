@@ -348,7 +348,7 @@
                 {
                     "name": "",
                     "id": "3c6dd73a-2f6c-4bed-a396-4dfbe2344bb2",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -359,7 +359,7 @@
                 {
                     "name": "",
                     "id": "62756b6a-8b7c-4d9c-a7b2-afbaa4b8c4fb",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
